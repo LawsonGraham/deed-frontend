@@ -6,6 +6,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'landingBackground':
+          "linear-gradient(to bottom, rgba(253, 63, 200, 0), rgba(255,255,255, 1)), url('../public/landingBackground.jpg')",
+      },
+      backdropContrast: {
+        25: '.25',
+      },
       margin: {
         default: '7%'
       },
@@ -19,7 +26,8 @@ module.exports = {
         'bgHeader': '#cbd5e1',
         'bgSubsection': '#fafafa',
         'bgPageDefault': 'white',
-        'fontBG': '#a1a1aa'
+        'fontBG': '#a1a1aa',
+        'textPink': '#E93F8E'
       },
     },
   },

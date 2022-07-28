@@ -48,7 +48,7 @@ function Project({ data }) {
               </div>
               <div className="p-4 bg-black">
                 <Link href={`/nfts/${nft.address}`}>
-                  <a className="mt-4 w-full bg-pink-500 text-white font-bold py-2 px-12 rounded">
+                  <a className="mt-4 w-full bg-textPink text-white font-bold py-2 px-12 rounded">
                     See NFT
                   </a>
                 </Link>

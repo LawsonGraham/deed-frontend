@@ -4,8 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
 import Web3Modal from 'web3modal';
-import ethLogo from '../public/ethLogo.png';
-import List from '../components/List';
+import List from '../../components/List';
 
 export default function NFT() {
   const router = useRouter();
@@ -110,7 +109,7 @@ export default function NFT() {
               <div className="p-3 font-bold bg-bgHeader w-full text-center text-xl">
                 <p>Auction Information</p>
               </div>
-              <div className='bg-bgSubsection'>
+              <div className="bg-bgSubsection">
                 <div name="pricing-ask-label" className="p-2 text-fontBG">
                   Current Price:
                 </div>
@@ -129,7 +128,10 @@ export default function NFT() {
                     <p className="text-4xl font-bold">{NFT.price} ETH</p>
                   </div>
                   <div className="flex flex-col-reverse p-1 text-fontBG">
-                    <p className="text-l"> &#40;${Math.round(NFT.price * 1445.56 * 100) / 100}&#41;</p>
+                    <p className="text-l">
+                      {' '}
+                      &#40;${Math.round(NFT.price * 1445.56 * 100) / 100}&#41;
+                    </p>
                   </div>
                 </div>
                 <div
@@ -138,13 +140,13 @@ export default function NFT() {
                 >
                   <button
                     name="pricing-buy-now"
-                    className="mt-4 w-full bg-pink-500 text-white font-bold p-2 rounded hover:scale-[103%]"
+                    className="mt-4 w-full bg-textPink text-white font-bold p-2 rounded hover:scale-[103%]"
                   >
                     Buy Now
                   </button>
                   <button
                     name="pricing-make-offer"
-                    className="mt-4 w-full bg-white text-pink-500 font-bold py-2 px-12 rounded border shadow hover:scale-[103%]"
+                    className="mt-4 w-full bg-white text-textPink font-bold py-2 px-12 rounded border shadow hover:scale-[103%]"
                   >
                     Make Offer
                   </button>
