@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       margin: {
-        default: '10%'
+        default: '7%'
       },
       height: theme => ({
         "screen/2": "50vh",
@@ -17,9 +17,10 @@ module.exports = {
       }),
       colors: {
         'bgHeader': '#cbd5e1',
-        'bgSubsection': '#fecaca',
-        'bgPageDefault': '#fafafa'
-      }
+        'bgSubsection': '#fafafa',
+        'bgPageDefault': 'white',
+        'fontBG': '#a1a1aa'
+      },
     },
   },
   plugins: [],
