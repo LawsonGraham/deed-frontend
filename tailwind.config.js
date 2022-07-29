@@ -26,7 +26,7 @@ module.exports = {
         'bgHeader': '#cbd5e1',
         'bgSubsection': '#fafafa',
         'bgPageDefault': 'white',
-        'fontBG': '#a1a1aa',
+        'fontBG': '#606775',
         'textPink': '#E93F8E'
       },
     },

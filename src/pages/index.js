@@ -51,19 +51,21 @@ function Home({ data }) {
           </div>
         </div>
       </div>
-
       <div
         name="lower-projects-section"
-        className="px-4  mx-default"
+        className="px-4  mx-default mb-10"
         style={{ maxWidth: '1600px' }}
       >
         <div className="text-3xl font-bold text-center m-4 pt-6">
           Explore Projects
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 mt-10">
           {projects.map((project, i) => (
             <div key={i} className="border shadow rounded-xl overflow-hidden">
-              <img src={project.coverImage} className="object-fill max-h-[187px] min-w-[280px]"/>
+              <img
+                src={project.coverImage}
+                className="object-fill aspect-[14/9]"
+              />
               <div className="p-4">
                 <p
                   style={{ height: '32px' }}
