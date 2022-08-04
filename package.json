@@ -8,7 +8,14 @@
     "start": "next start",
     "lint": "next lint",
     "prettier:fix": "prettier --write src/",
-    "prettier:check": "prettier --check src/"
+    "prettier:check": "prettier --check src/",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,html,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.1.0",
@@ -20,6 +27,7 @@
     "ethers": "^5.6.9",
     "hardhat": "^2.10.0",
     "ipfs-http-client": "^57.0.3",
+    "lint-staged": "^13.0.3",
     "next": "12.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
