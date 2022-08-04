@@ -9,10 +9,11 @@
     "lint": "next lint",
     "prettier:fix": "prettier --write src/",
     "prettier:check": "prettier --check src/",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,json,css,scss,html,md}": [
+    "src/.{js,json,css,scss,html,md}": [
       "prettier --write",
       "git add"
     ]
@@ -37,7 +38,7 @@
     "autoprefixer": "^10.4.7",
     "eslint": "8.19.0",
     "eslint-config-next": "12.2.2",
-    "husky": "^4.3.8",
+    "husky": "^8.0.0",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.5"
