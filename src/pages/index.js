@@ -2,25 +2,18 @@ import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 import axios from 'axios';
 import Web3Modal from 'web3modal';
 import { marketplaceAddress } from '../config';
+import deedCommunity from '../public/deedCommunity.png';
+import purchase from '../public/purchase.png';
+import stock from '../public/stock.png';
+import community from '../public/community.png';
 
 function Home({ data }) {
-  const [projects, setProjects] = useState(data);
+  const projects = data;
   const [loadingState, setLoadingState] = useState('not-loaded');
-  // useEffect(() => {
-  //   loadProjects();
-  // }, []);
-
-  // async function loadProjects() {
-  //   const res = await fetch('${process.env.NEXT_PUBLIC_API_URL}/v1/project/');
-
-  //   const projects = await res.json();
-
-  //   setProjects(projects);
-  //   setLoadingState('loaded');
-  // }
 
   if (loadingState === 'loaded' && !projects.length)
     return <h1 className="px-20 py-10 text-3xl">No items in marketplace</h1>;
@@ -45,12 +38,69 @@ function Home({ data }) {
               </p>
             </div>
           </div>
-
           <div name="upper-landing-right" className="basis-6/12 object-contain">
-            <img src="https://uxwing.com/wp-content/themes/uxwing/download/12-peoples-avatars/community-man.png" />
+            <Image src={deedCommunity} layout="intrinsic" />
           </div>
         </div>
       </div>
+
+      <div
+        name="middle-cards"
+        className="bg-landingMiddleBackground px-7  mx-default my-16 mt-20"
+      >
+        <div className="grid grid-cols-3 space-x-3">
+          <div className="border shadow-2xl rounded-lg overflow-hidden bg-bgSubsection p-10">
+            <div className="flex justify-center py-3">
+              <Image src={purchase} height={80} width={80} />
+            </div>
+            <div className="p-4">
+              <p className="text-2xl font-semibold text-center">
+                Fund Projects
+              </p>
+            </div>
+            <div className="px-4 pb-2 pt-1 text-fontBG text-center">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+          </div>
+
+          <div className="border shadow-2xl rounded-lg overflow-hidden bg-bgSubsection p-10">
+            <div className="flex justify-center py-3">
+              <Image src={stock} height={80} width={80} />
+            </div>
+            <div className="p-4">
+              <p className="text-2xl font-semibold text-center">
+                Grow Businesses
+              </p>
+            </div>
+            <div className="px-4 pb-2 pt-1 text-fontBG text-center">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+          </div>
+          <div className="border shadow-2xl rounded-lg overflow-hidden bg-bgSubsection p-10">
+            <div className="flex justify-center py-3">
+              <Image src={community} height={80} width={80} />
+            </div>
+            <div className="p-4">
+              <p className="text-2xl font-semibold text-center">
+                Build Community
+              </p>
+            </div>
+            <div className="px-4 pb-2 pt-1 text-fontBG text-center">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div
         name="lower-projects-section"
         className="px-4  mx-default mb-10"

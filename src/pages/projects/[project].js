@@ -82,9 +82,7 @@ function Project({ nftsData, projectData }) {
           <div className="flex flex-row p-3 font-bold bg-textPink w-full text-white">
             <p className="basis-1/3"></p>
             <div className="flex flex-row justify-center basis-1/3">
-              <p className="justify-self-center text-xl">
-                Auction Information
-              </p>
+              <p className="justify-self-center text-xl">Auction Information</p>
             </div>
             <div className="flex flex-row justify-end basis-1/3">
               <p className="text-m self-center">
@@ -126,7 +124,9 @@ function Project({ nftsData, projectData }) {
 export async function getServerSideProps(ctx) {
   // Fetch data from external API
   const projectURL = ctx.query.project;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/nft/project/${projectURL}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/nft/project/${projectURL}`
+  );
   const nftsData = await res.json();
 
   const projectRes = await fetch(

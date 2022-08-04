@@ -9,6 +9,8 @@ module.exports = {
       backgroundImage: {
         'landingBackground':
           "linear-gradient(to bottom, rgba(253, 63, 200, 0), rgba(255,255,255, 1)), url('../public/landingBackground.jpg')",
+          'landingMiddleBackground':
+          "linear-gradient(to bottom, rgba(255,255,255, 1)), rgba(168, 159, 164, .48)",
       },
       backdropContrast: {
         25: '.25',

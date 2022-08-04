@@ -7,8 +7,6 @@ import { useRouter } from 'next/router';
 
 import { marketplaceAddress } from '../config';
 
-import NFTMarketplace from '../../backend/artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
-
 export default function MyAssets() {
   const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState('not-loaded');
