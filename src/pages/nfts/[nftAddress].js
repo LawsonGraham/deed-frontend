@@ -19,21 +19,21 @@ export default function NFT() {
   const [loadingState, setLoadingState] = useState('not-loaded');
   useEffect(() => {
     loadData();
-  }, [nftAddress, loadingState, projectData]);
+  }, [nftAddress, loadingState]);
 
   async function loadData() {
-    const nftRes = await fetch(`http://localhost:4000/v1/nft/${nftAddress}`);
+    const nftRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/nft/${nftAddress}`);
     const nftData = await nftRes.json();
     setNFT(nftData);
     console.log(NFT);
     const projRes = await fetch(
-      `http://localhost:4000/v1/project/${NFT.projecturl}`
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/project/${NFT.projecturl}`
     );
     const projectData = await projRes.json();
     setProjectData(projectData);
     const projNFTsRes = await fetch(
       // add project/${nftData.projecturl} to have just the project's nft
-      `http://localhost:4000/v1/nft/`
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/nft/`
     );
     const projectNFTs = await projNFTsRes.json();
     setProjectNFTs(projectNFTs.slice(0, 8));

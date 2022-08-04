@@ -14,7 +14,7 @@ function Home({ data }) {
   // }, []);
 
   // async function loadProjects() {
-  //   const res = await fetch('http://localhost:4000/v1/project/');
+  //   const res = await fetch('${process.env.NEXT_PUBLIC_API_URL}/v1/project/');
 
   //   const projects = await res.json();
 
@@ -94,7 +94,7 @@ function Home({ data }) {
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`http://localhost:4000/v1/project/`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/project/`);
   const data = await res.json();
 
   // Pass data to the page via props

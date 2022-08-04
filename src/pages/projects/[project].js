@@ -17,7 +17,7 @@ function Project({ nftsData, projectData }) {
   // }, []);
 
   // async function loadNfts() {
-  //   const res = await fetch(`http://localhost:4000/v1/nft/boredapesyachtclub`);
+  //   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/nft/boredapesyachtclub`);
   //   const arr = await res.json();
 
   //   console.log(arr)
@@ -126,11 +126,11 @@ function Project({ nftsData, projectData }) {
 export async function getServerSideProps(ctx) {
   // Fetch data from external API
   const projectURL = ctx.query.project;
-  const res = await fetch(`http://localhost:4000/v1/nft/project/${projectURL}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/nft/project/${projectURL}`);
   const nftsData = await res.json();
 
   const projectRes = await fetch(
-    `http://localhost:4000/v1/project/${projectURL}`
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/project/${projectURL}`
   );
   const projectData = await projectRes.json();
 
