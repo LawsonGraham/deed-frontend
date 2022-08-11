@@ -26,6 +26,10 @@ export default function Nav() {
     setWeb3Modal(web3Modal);
   }, []);
 
+  useEffect(() => {
+    if (loggedIn) checkWallet();
+  }, [cookies.account]);
+
   const connectMetaMask = async () => {
     try {
       const provider = await web3Modal.connect();
@@ -44,9 +48,27 @@ export default function Nav() {
     }
   };
 
+  const checkWallet = async () => {
+    if (window.ethereum) {
+      // check if i have metamask installed or not
+      ethereum.on('accountsChanged', (accounts) => {
+        setCookie('account', accounts[0], {
+          path: '/',
+        });
+        if (!accounts.length) {
+          setCookie('loggedIn', false, {
+            path: '/',
+          });
+        }
+        // Handle the new accounts, or lack thereof.
+        // "accounts" will always be an array, but it can be empty.
+      });
+    }
+  };
+
   useEffect(() => {
     setLoggedIn(cookies.loggedIn);
-  }, [cookies.loggedIn]);
+  }, [cookies.loggedIn, cookies.account]);
 
   return (
     <nav className="flex flex-row border-b p-6">

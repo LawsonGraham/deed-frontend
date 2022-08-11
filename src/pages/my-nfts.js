@@ -29,6 +29,7 @@ function MyAssets() {
 
   async function loadNFTs() {
     await checkWallet();
+    console.log(account);
     const nftRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/nft/owner/${account}`
     );
