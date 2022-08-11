@@ -2,14 +2,15 @@
 import '../styles/globals.css';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { CookiesProvider } from 'react-cookie';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div>
+    <CookiesProvider>
       <Nav />
       <Component {...pageProps} />
       <Footer />
-    </div>
+    </CookiesProvider>
   );
 }
 

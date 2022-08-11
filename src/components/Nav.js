@@ -1,12 +1,59 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import Web3Modal from 'web3modal';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import { useCookies } from 'react-cookie';
 
 export default function Nav() {
+  const [web3Modal, setWeb3Modal] = useState('');
+  const [cookies, setCookie] = useCookies(['loggedIn', 'account']);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const providerOptions = {
+      walletconnect: {
+        package: WalletConnectProvider, // required
+        options: {
+          infuraId: 'INFURA_ID', // required
+        },
+      },
+    };
+    const web3Modal = new Web3Modal({
+      cacheProvider: true, // optional
+      providerOptions, // required
+    });
+    setWeb3Modal(web3Modal);
+  }, []);
+
+  const connectMetaMask = async () => {
+    try {
+      const provider = await web3Modal.connect();
+      const library = new ethers.providers.Web3Provider(provider);
+      const accounts = await library.listAccounts();
+      if (accounts) {
+        setCookie('account', accounts[0], {
+          path: '/',
+        });
+      }
+      setCookie('loggedIn', true, {
+        path: '/',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    setLoggedIn(cookies.loggedIn);
+  }, [cookies.loggedIn]);
+
   return (
     <nav className="flex flex-row border-b p-6">
-      <p className="text-4xl font-bold pr-4 pl-2 basis-1/3 text-left">
+      <p className="text-4xl font-bold pr-4 pl-2 basis-4/12 text-left">
         Deed Crowdfunding
       </p>
-      <div className="justify-center basis-1/3">
+      <div className="justify-center basis-3/12">
         <div className="mb-3 xl:w-96">
           <div className="input-group relative flex flex-row items-stretch w-full mb-4">
             <input
@@ -40,19 +87,35 @@ export default function Nav() {
           </div>
         </div>
       </div>
-      <div className="flex mt-3 pl-5 basis-1/3 align-middle">
+      <div className="flex justify-between pl-6 basis-5/12">
         <Link href="/">
-          <a className="mr-4 text-textPink">Home</a>
+          <a className="mt-2 text-textPink">Home</a>
         </Link>
         <Link href="/create-nft">
-          <a className="mr-6 text-textPink">Sell NFT</a>
+          <a className="mt-2 text-textPink">Sell NFT</a>
         </Link>
         <Link href="/my-nfts">
-          <a className="mr-6 text-textPink">My NFTs</a>
+          <a className="mt-2 text-textPink">My NFTs</a>
         </Link>
         <Link href="/dashboard">
-          <a className="mr-6 text-textPink">Dashboard</a>
+          <a className="mt-2 text-textPink">Dashboard</a>
         </Link>
+        {loggedIn === 'true' ? (
+          <div className="">
+            <p className="px-3 py-1 bg-bgSubsection text-textPink text-lg text-bold border-black text-xs leading-tight rounded-3xl shadow-md">
+              {cookies.account.substring(0, 10)}...
+            </p>
+          </div>
+        ) : (
+          <div className="">
+            <btn
+              onClick={connectMetaMask}
+              className="btn px-6 py-2.5 bg-textPink text-white font-medium text-xs leading-tight rounded-3xl shadow-md hover:bg-pink-600 hover:shadow-lg focus:bg-pink-600  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-700 active:shadow-lg transition duration-150 ease-in-out flex items-center"
+            >
+              Connect Wallet
+            </btn>
+          </div>
+        )}
       </div>
     </nav>
   );

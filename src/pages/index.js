@@ -46,9 +46,9 @@ function Home({ data }) {
 
       <div
         name="middle-cards"
-        className="bg-landingMiddleBackground px-7  mx-default my-16 mt-20"
+        className="bg-landingMiddleBackground px-7  mx-default my-16 mt-20 px-24"
       >
-        <div className="grid grid-cols-3 space-x-3">
+        <div className="grid grid-cols-3 space-x-5">
           <div className="border shadow-2xl rounded-lg overflow-hidden bg-bgSubsection p-10">
             <div className="flex justify-center py-3">
               <Image src={purchase} height={80} width={80} />
@@ -65,7 +65,6 @@ function Home({ data }) {
               </p>
             </div>
           </div>
-
           <div className="border shadow-2xl rounded-lg overflow-hidden bg-bgSubsection p-10">
             <div className="flex justify-center py-3">
               <Image src={stock} height={80} width={80} />
