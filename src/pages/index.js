@@ -36,6 +36,11 @@ function Home({ data }) {
               <p className="text-xl font-bold pl-4">
                 Powered by the Blockchain.
               </p>
+              <Link href={`/projects`}>
+                <a className="grid place-items-center mt-4 w-1/4 bg-textPink text-white font-bold py-2 px-12 rounded-xl ml-10">
+                  Browse
+                </a>
+              </Link>
             </div>
           </div>
           <div name="upper-landing-right" className="basis-6/12 object-contain">
@@ -127,8 +132,8 @@ function Home({ data }) {
                 </p>
               </div>
               <div className="px-4 pb-2 pt-1 bg-black">
-                <Link href={`/projects/${project.url}`}>
-                  <a className="grid place-items-center mt-4 w-full bg-textPink text-white font-bold py-2 px-12 rounded">
+                <Link href={`/project/${project.url}`}>
+                  <a className="grid place-items-center mt-4 w-full bg-textPink text-white font-bold py-2 px-12 rounded-xl">
                     See Project
                   </a>
                 </Link>
