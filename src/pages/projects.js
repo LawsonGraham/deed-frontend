@@ -29,7 +29,7 @@ function Projects() {
   }, [account, loadingState]);
 
   useEffect(() => {
-    loadNFTs();
+    loadProjects();
   }, [account, loadingState, loggedIn]);
 
   async function updateFilter(field, i) {
@@ -64,7 +64,7 @@ function Projects() {
     setLoadingState('loaded');
   }
 
-  async function loadNFTs() {
+  async function loadProjects() {
     const projectsRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/project/`
     );
