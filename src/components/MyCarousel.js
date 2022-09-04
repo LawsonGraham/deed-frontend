@@ -6,53 +6,25 @@ const Carousel = (props) => {
   const [activeProjects, setActiveProjects] = useState(
     props.projects.slice(0, 3)
   );
-  const [start, setStart] = useState(0);
-
   const projects = props.projects;
 
   const movePrev = () => {
-    console.log(start + ' ' + currentIndex);
-    let p;
-    if (start - 1 < 0) {
-      p = activeProjects.slice(0, 2);
-      p.unshift(projects[projects.length - 1]);
-      setStart(projects.length - 2);
-      setCurrentIndex(currentIndex - 1);
-    } else {
-      p = activeProjects.slice(0, 2);
-      p.unshift(projects[start]);
-      console.log(p);
-      if (currentIndex - 1 < 0) {
-        setCurrentIndex(projects.length - 2);
-      } else {
-        setStart(start - 1);
-      }
-      setCurrentIndex((prevState) => prevState - 1);
-    }
+    let n = currentIndex % projects.length;
+    let p = activeProjects.slice(0, 2);
+    p.unshift(projects[n]);
+    setCurrentIndex(currentIndex - 1);
     setActiveProjects(p);
-    console.log(currentIndex);
+    if (currentIndex < 0) {
+      setCurrentIndex(projects.length * 3);
+    }
   };
 
   const moveNext = () => {
-    let p;
-    if (currentIndex + 1 > projects.length) {
-      p = activeProjects.slice(1, 3);
-      p.push(projects[0]);
-      setStart(start + 1);
-      setCurrentIndex(1);
-    } else {
-      p = activeProjects.slice(1, 3);
-      p.push(projects[currentIndex]);
-      console.log(p);
-      if (start + 1 > projects.length + 1) {
-        setStart(0);
-      } else {
-        setStart(start + 1);
-      }
-      setCurrentIndex((prevState) => prevState + 1);
-    }
+    let n = currentIndex % projects.length;
+    let p = activeProjects.slice(1, 3);
+    p.push(projects[n]);
+    setCurrentIndex(currentIndex + 1);
     setActiveProjects(p);
-    console.log(currentIndex);
   };
 
   return (

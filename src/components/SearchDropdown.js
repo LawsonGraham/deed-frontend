@@ -44,7 +44,7 @@ export default function SearchDropdown(props) {
         <Menu.Items className="absolute right-8 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             {listValues.map((state, i) => (
-              <Menu.Item>
+              <Menu.Item key={i}>
                 {({ active }) => (
                   <a
                     onClick={() => {

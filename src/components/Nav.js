@@ -9,6 +9,8 @@ export default function Nav() {
   const [web3Modal, setWeb3Modal] = useState('');
   const [cookies, setCookie] = useCookies(['loggedIn', 'account']);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [owners, setOwners] = useState([]);
+  const [projectOwner, setProjectOwner] = useState(false);
 
   useEffect(() => {
     const providerOptions = {
@@ -24,11 +26,37 @@ export default function Nav() {
       providerOptions, // required
     });
     setWeb3Modal(web3Modal);
+    getOwners();
   }, []);
 
   useEffect(() => {
-    if (loggedIn) checkWallet();
+    if (loggedIn) {
+      checkWallet();
+      checkOwner;
+    }
   }, [cookies.account]);
+
+  const getOwners = async () => {
+    const ownersRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/project/`
+    );
+    const ownersData = await ownersRes.json();
+    let ownersArray = [];
+    for (let i = 0; i < ownersData.length; i++) {
+      ownersArray.push(ownersData[i].owner);
+    }
+    setOwners(ownersArray);
+  };
+
+  const checkOwner = async () => {
+    if (cookies.account) {
+      if (owners.includes(cookies.account.toLowerCase())) {
+        setProjectOwner(true);
+      } else {
+        setProjectOwner(false);
+      }
+    }
+  };
 
   const connectMetaMask = async () => {
     try {
@@ -68,6 +96,7 @@ export default function Nav() {
 
   useEffect(() => {
     setLoggedIn(cookies.loggedIn);
+    checkOwner();
   }, [cookies.loggedIn, cookies.account]);
 
   return (
@@ -119,9 +148,11 @@ export default function Nav() {
         <Link href="/my-nfts">
           <a className="mt-2 text-textPink">My NFTs</a>
         </Link>
-        <Link href="/dashboard">
-          <a className="mt-2 text-textPink">Dashboard</a>
-        </Link>
+        {loggedIn && projectOwner && (
+          <Link href="/dashboard">
+            <a className="mt-2 text-textPink">Dashboard</a>
+          </Link>
+        )}
         {loggedIn === 'true' ? (
           <div className="">
             <p className="px-3 py-2.5 bg-bgSubsection text-textPink text-lg text-bold border-black text-sm leading-tight rounded-3xl shadow-md">
