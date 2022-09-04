@@ -10,7 +10,7 @@ export default function ProgressBar(props) {
             <span className="text-xs font-semibold inline-block text-black">
               {props.raiseGoal > 10000
                 ? `${Math.round(props.raiseGoal / 1000)}K`
-                : props.raiseGoal}{' '}
+                : props.raiseGoal.toLocaleString('en-US')}{' '}
               XRPL
             </span>
           </div>
