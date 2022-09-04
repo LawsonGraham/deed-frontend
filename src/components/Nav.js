@@ -113,8 +113,8 @@ export default function Nav() {
         <Link href="/">
           <a className="mt-2 text-textPink">Home</a>
         </Link>
-        <Link href="/create-nft">
-          <a className="mt-2 text-textPink">Sell NFT</a>
+        <Link href="/projects">
+          <a className="mt-2 text-textPink">Browse</a>
         </Link>
         <Link href="/my-nfts">
           <a className="mt-2 text-textPink">My NFTs</a>
@@ -124,7 +124,7 @@ export default function Nav() {
         </Link>
         {loggedIn === 'true' ? (
           <div className="">
-            <p className="px-3 py-1 bg-bgSubsection text-textPink text-lg text-bold border-black text-xs leading-tight rounded-3xl shadow-md">
+            <p className="px-3 py-2.5 bg-bgSubsection text-textPink text-lg text-bold border-black text-sm leading-tight rounded-3xl shadow-md">
               {cookies.account.substring(0, 10)}...
             </p>
           </div>

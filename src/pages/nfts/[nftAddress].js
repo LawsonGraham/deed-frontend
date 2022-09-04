@@ -369,13 +369,13 @@ function NFT() {
                       name="pricing-offer-buttons"
                       className="flex row p-2 space-x-2"
                     >
-                      <button
+                      <pinkButton
                         name="pricing-buy-now"
                         className="mt-4 w-full bg-textPink text-white font-bold p-2 rounded hover:scale-[103%]"
                         onClick={() => setShowChangePrice(true)}
                       >
                         Change Price
-                      </button>
+                      </pinkButton>
 
                       <button
                         name="pricing-make-offer"
@@ -389,12 +389,12 @@ function NFT() {
                       name="pricing-offer-buttons"
                       className="flex row p-2 space-x-2"
                     >
-                      <button
+                      <pinkButton
                         name="pricing-buy-now"
-                        className="mt-4 w-full bg-textPink text-white font-bold p-2 rounded hover:scale-[103%]"
+                        className="mt-4 p-2 rounded hover:scale-[103%]"
                       >
                         Buy Now
-                      </button>
+                      </pinkButton>
                       <button
                         name="pricing-make-offer"
                         className="mt-4 w-full bg-white text-textPink font-bold py-2 px-12 rounded border shadow hover:scale-[103%]"

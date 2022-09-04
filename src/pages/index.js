@@ -10,6 +10,8 @@ import deedCommunity from '../public/deedCommunity.png';
 import purchase from '../public/purchase.png';
 import stock from '../public/stock.png';
 import community from '../public/community.png';
+import ProgressBar from '../components/ProgressBar';
+import Carousel from '../components/Carousel';
 
 function Home({ data }) {
   const projects = data;
@@ -37,9 +39,9 @@ function Home({ data }) {
                 Powered by the Blockchain.
               </p>
               <Link href={`/projects`}>
-                <a className="grid place-items-center mt-4 w-1/4 bg-textPink text-white font-bold py-2 px-12 rounded-xl ml-10">
+                <pinkButton className="grid place-items-center mt-4 w-1/4 py-2 px-12 rounded-xl ml-10">
                   Browse
-                </a>
+                </pinkButton>
               </Link>
             </div>
           </div>
@@ -113,34 +115,40 @@ function Home({ data }) {
         <div className="text-3xl font-bold text-center m-4 pt-6">
           Explore Projects
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-4 mt-10">
           {projects.map((project, i) => (
             <div key={i} className="border shadow rounded-xl overflow-hidden">
               <img
                 src={project.coverImage}
-                className="object-fill aspect-[14/9]"
+                className="rounded object-fill aspect-[14/9]"
               />
-              <div className="p-4">
-                <p
-                  style={{ height: '32px' }}
-                  className="text-2xl font-semibold"
-                >
+              <div className="px-4 py-3 bg-gray-100">
+                <p className="text-2xl font-bold text-black text-center">
                   {project.name}
                 </p>
-                <p style={{ height: '32px' }} className="text-xl">
-                  {project.id}
-                </p>
-              </div>
-              <div className="px-4 pb-2 pt-1 bg-black">
-                <Link href={`/project/${project.url}`}>
-                  <a className="grid place-items-center mt-4 w-full bg-textPink text-white font-bold py-2 px-12 rounded-xl">
-                    See Project
-                  </a>
+                <ProgressBar
+                  raiseGoal={project.raiseGoal}
+                  raiseCurrent={project.raiseCurrent}
+                  color="red"
+                />
+                <div className="flex flex-row">
+                  <p className="text-sm font-bold text-black pt-2 basis-5/12">
+                    End Date:
+                  </p>
+                  <p className="text-sm font-bold text-black pt-2 basis-7/12">
+                    {project.endDate}
+                  </p>
+                </div>
+                <Link href={{ pathname: `/project/${project.url}` }} key={i}>
+                  <pinkButton className="mt-4 w-full rounded">
+                    View This Project
+                  </pinkButton>
                 </Link>
               </div>
             </div>
           ))}
         </div>
+        <Carousel projects={projects} />
       </div>
     </div>
   );
