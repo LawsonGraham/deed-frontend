@@ -11,7 +11,7 @@ import purchase from '../public/purchase.png';
 import stock from '../public/stock.png';
 import community from '../public/community.png';
 import ProgressBar from '../components/ProgressBar';
-import Carousel from '../components/Carousel';
+import MyCarousel from '../components/MyCarousel';
 
 function Home({ data }) {
   const projects = data;
@@ -109,46 +109,13 @@ function Home({ data }) {
 
       <div
         name="lower-projects-section"
-        className="px-4  mx-default mb-10"
+        className="px-4  mx-[5%] mb-10 mt-8"
         style={{ maxWidth: '1600px' }}
       >
         <div className="text-3xl font-bold text-center m-4 pt-6">
           Explore Projects
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-4 mt-10">
-          {projects.map((project, i) => (
-            <div key={i} className="border shadow rounded-xl overflow-hidden">
-              <img
-                src={project.coverImage}
-                className="rounded object-fill aspect-[14/9]"
-              />
-              <div className="px-4 py-3 bg-gray-100">
-                <p className="text-2xl font-bold text-black text-center">
-                  {project.name}
-                </p>
-                <ProgressBar
-                  raiseGoal={project.raiseGoal}
-                  raiseCurrent={project.raiseCurrent}
-                  color="red"
-                />
-                <div className="flex flex-row">
-                  <p className="text-sm font-bold text-black pt-2 basis-5/12">
-                    End Date:
-                  </p>
-                  <p className="text-sm font-bold text-black pt-2 basis-7/12">
-                    {project.endDate}
-                  </p>
-                </div>
-                <Link href={{ pathname: `/project/${project.url}` }} key={i}>
-                  <pinkButton className="mt-4 w-full rounded">
-                    View This Project
-                  </pinkButton>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-        <Carousel projects={projects} />
+        <MyCarousel projects={projects} />
       </div>
     </div>
   );
