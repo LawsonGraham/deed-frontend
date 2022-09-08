@@ -31,6 +31,8 @@ module.exports = {
         fontBG: '#606775',
         textPink: '#E93F8E',
         hoverPink: '#c71a6a',
+        activeGreen: '#1ADB34',
+        badRed: '#E00422',
       },
     },
   },

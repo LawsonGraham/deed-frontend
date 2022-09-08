@@ -250,11 +250,8 @@ function NFT() {
           <div className="flex justify-center">
             <div name="left-panel-upper" className="basis-5/12 p-2 space-y-3">
               <div>
-                <div className="grid gap-4 place-content-center border shadow rounded-xl overflow-hidden max-w-xl">
-                  <img
-                    className="object-contain object-cover"
-                    src={NFT.imageLink}
-                  />
+                <div className="border shadow rounded-xl overflow-hidden ">
+                  <img className="w-full" src={NFT.imageLink} />
                 </div>
               </div>
               <div
@@ -282,25 +279,28 @@ function NFT() {
                 name="right-panel-upper-header"
                 className="overflow-hidden p-2"
               >
-                <Link href={`/projects/${NFT.projecturl}`}>
-                  <div className="flex flex-row">
-                    <a className=" text-blue-500 font-bold pr-2">
-                      {projectData.name}
-                    </a>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="blue"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </Link>
+                <div className="cursor-pointer">
+                  <Link href={`/project/${NFT.projecturl}`}>
+                    <div className="flex flex-row">
+                      <a className=" text-blue-500 font-bold pr-2">
+                        {projectData.name}
+                      </a>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="blue"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </Link>
+                </div>
+
                 <div className="grid gap-4 font-bold text-4xl pt-3">
                   {NFT.nftName}
                 </div>
@@ -428,7 +428,7 @@ function NFT() {
                   >
                     <img
                       src={nft.imageLink}
-                      className="object-cover mx-auto hover:scale-110 rounded-xl"
+                      className="object-cover mx-auto hover:scale-110 rounded-xl w-fill"
                     />
                     <div className="p-4">
                       <p

@@ -182,7 +182,7 @@ function Projects() {
               <div key={i} className="border shadow rounded-xl overflow-hidden">
                 <img
                   src={project.coverImage}
-                  className="rounded object-fill aspect-[14/9]"
+                  className="rounded object-fill aspect-[14/9] w-full"
                 />
                 <div className="p-4 bg-gray-100">
                   <p className="text-3xl font-bold text-black text-center">
@@ -201,7 +201,7 @@ function Projects() {
                       {Math.round(
                         (project.totalShares / project.raiseGoal) * 100
                       ) / 100}{' '}
-                      XRPL / Share
+                      ETH / Share
                     </p>
                   </div>
                   <div className="flex flex-row">
@@ -220,11 +220,16 @@ function Projects() {
                       {project.endDate}
                     </p>
                   </div>
-                  <Link href={{ pathname: `/project/${project.url}` }} key={i}>
-                    <pinkButton className="mt-4 w-full rounded">
-                      View This Project
-                    </pinkButton>
-                  </Link>
+                  <div className="cursor-pointer">
+                    <Link
+                      href={{ pathname: `/project/${project.url}` }}
+                      key={i}
+                    >
+                      <pinkButton className="mt-4 w-full rounded">
+                        View This Project
+                      </pinkButton>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}

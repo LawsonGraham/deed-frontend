@@ -3,14 +3,10 @@ import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import { useCookies } from 'react-cookie';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 
 export default function Nav() {
-  const [web3Modal, setWeb3Modal] = useState('');
-  const [cookies, setCookie] = useCookies(['loggedIn', 'account']);
-  const [loggedIn, setLoggedIn] = useState(false);
   const [owners, setOwners] = useState([]);
   const [projectOwner, setProjectOwner] = useState(false);
   const { address } = useAccount();
@@ -82,7 +78,7 @@ export default function Nav() {
           </div>
         </div>
       </div>
-      <div className="flex justify-between pl-6 basis-5/12 gap-3">
+      <div className="flex justify-between basis-5/12 gap-3 lg:mr-2 sm:mr-0 lg:ml-9 sm:ml-2">
         <Link href="/">
           <a className="mt-2 text-textPink">Home</a>
         </Link>
