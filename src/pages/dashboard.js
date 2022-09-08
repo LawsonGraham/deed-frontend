@@ -8,21 +8,22 @@ import { useCookies } from 'react-cookie';
 import ProgressBar from '../components/ProgressBar';
 import NftList from '../components/NftList';
 import Link from 'next/link';
+import { useAccount } from 'wagmi';
 
 export default function CreatorDashboard() {
   const [projects, setProjects] = useState([]);
   const [projectsNFTs, setProjectsNFTs] = useState([]);
-  const [cookies, setCookie] = useCookies(['loggedIn', 'account']);
   const [loadingState, setLoadingState] = useState('not-loaded');
+  const { address } = useAccount();
 
   useEffect(() => {
     loadProjects();
-  }, []);
+  }, [address]);
   async function loadProjects() {
     const projectsRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/project/?` +
         new URLSearchParams({
-          owner: cookies.account ? cookies.account.toLowerCase() : '',
+          owner: address ? address.toLowerCase() : '',
         }),
       {
         method: 'GET',

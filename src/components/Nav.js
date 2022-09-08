@@ -4,6 +4,8 @@ import { ethers } from 'ethers';
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { useCookies } from 'react-cookie';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
 
 export default function Nav() {
   const [web3Modal, setWeb3Modal] = useState('');
@@ -11,30 +13,7 @@ export default function Nav() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [owners, setOwners] = useState([]);
   const [projectOwner, setProjectOwner] = useState(false);
-
-  useEffect(() => {
-    const providerOptions = {
-      walletconnect: {
-        package: WalletConnectProvider, // required
-        options: {
-          infuraId: 'INFURA_ID', // required
-        },
-      },
-    };
-    const web3Modal = new Web3Modal({
-      cacheProvider: true, // optional
-      providerOptions, // required
-    });
-    setWeb3Modal(web3Modal);
-    getOwners();
-  }, []);
-
-  useEffect(() => {
-    if (loggedIn) {
-      checkWallet();
-      checkOwner;
-    }
-  }, [cookies.account]);
+  const { address } = useAccount();
 
   const getOwners = async () => {
     const ownersRes = await fetch(
@@ -49,55 +28,20 @@ export default function Nav() {
   };
 
   const checkOwner = async () => {
-    if (cookies.account) {
-      if (owners.includes(cookies.account.toLowerCase())) {
-        setProjectOwner(true);
-      } else {
-        setProjectOwner(false);
-      }
-    }
-  };
-
-  const connectMetaMask = async () => {
-    try {
-      const provider = await web3Modal.connect();
-      const library = new ethers.providers.Web3Provider(provider);
-      const accounts = await library.listAccounts();
-      if (accounts) {
-        setCookie('account', accounts[0], {
-          path: '/',
-        });
-      }
-      setCookie('loggedIn', true, {
-        path: '/',
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const checkWallet = async () => {
-    if (window.ethereum) {
-      // check if i have metamask installed or not
-      ethereum.on('accountsChanged', (accounts) => {
-        setCookie('account', accounts[0], {
-          path: '/',
-        });
-        if (!accounts.length) {
-          setCookie('loggedIn', false, {
-            path: '/',
-          });
-        }
-        // Handle the new accounts, or lack thereof.
-        // "accounts" will always be an array, but it can be empty.
-      });
+    if (owners.includes(address ? address.toLowerCase() : null)) {
+      setProjectOwner(true);
+    } else {
+      setProjectOwner(false);
     }
   };
 
   useEffect(() => {
-    setLoggedIn(cookies.loggedIn);
     checkOwner();
-  }, [cookies.loggedIn, cookies.account]);
+  }, [address]);
+
+  useEffect(() => {
+    getOwners();
+  }, []);
 
   return (
     <nav className="flex flex-row border-b p-6">
@@ -138,7 +82,7 @@ export default function Nav() {
           </div>
         </div>
       </div>
-      <div className="flex justify-between pl-6 basis-5/12">
+      <div className="flex justify-between pl-6 basis-5/12 gap-3">
         <Link href="/">
           <a className="mt-2 text-textPink">Home</a>
         </Link>
@@ -148,27 +92,22 @@ export default function Nav() {
         <Link href="/my-nfts">
           <a className="mt-2 text-textPink">My NFTs</a>
         </Link>
-        {loggedIn && projectOwner && (
+        {projectOwner && (
           <Link href="/dashboard">
             <a className="mt-2 text-textPink">Dashboard</a>
           </Link>
         )}
-        {loggedIn === 'true' ? (
-          <div className="">
-            <p className="px-3 py-2.5 bg-bgSubsection text-textPink text-lg text-bold border-black text-sm leading-tight rounded-3xl shadow-md">
-              {cookies.account.substring(0, 10)}...
-            </p>
-          </div>
-        ) : (
-          <div className="">
-            <btn
-              onClick={connectMetaMask}
-              className="btn px-6 py-2.5 bg-textPink text-white font-medium text-xs leading-tight rounded-3xl shadow-md hover:bg-pink-600 hover:shadow-lg focus:bg-pink-600  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-700 active:shadow-lg transition duration-150 ease-in-out flex items-center"
-            >
-              Connect Wallet
-            </btn>
-          </div>
-        )}
+        <div className="h-10">
+          <ConnectButton
+            showBalance={false}
+            chainStatus="none"
+            className="rounded-xl"
+            accountStatus={{
+              smallScreen: 'avatar',
+              largeScreen: 'full',
+            }}
+          />
+        </div>
       </div>
     </nav>
   );

@@ -6,8 +6,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import Web3Modal from 'web3modal';
 import List from '../../components/List';
-import { useCookies, withCookies } from 'react-cookie';
-import { check } from 'prettier';
+import { useAccount } from 'wagmi';
 
 function NFT() {
   const router = useRouter();
@@ -18,44 +17,19 @@ function NFT() {
   const [showProjNFTs, setShowProjNFTs] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
   const [showTxns, setShowTxns] = useState(true);
-  const [cookies, setCookie] = useCookies();
-  const [account, setAccount] = useState('');
   const [showChangePrice, setShowChangePrice] = useState(false);
   const [showEmptyPriceError, setShowEmptyPriceError] = useState(false);
   const [inputPriceChange, setInputPriceChange] = useState('');
+  const { address } = useAccount();
 
   const [loadingState, setLoadingState] = useState('not-loaded');
   useEffect(() => {
     loadData();
   }, [nftAddress, loadingState]);
 
-  useEffect(() => {
-    setAccount(cookies.account);
-  }, [cookies.account]);
-
-  const checkWallet = async () => {
-    if (window.ethereum) {
-      // check if i have metamask installed or not
-      ethereum.on('accountsChanged', (accounts) => {
-        setAccount(accounts[0]);
-        setCookie('account', accounts[0], {
-          path: '/',
-        });
-        if (!accounts.length) {
-          setCookie('loggedIn', false, {
-            path: '/',
-          });
-        }
-        // Handle the new accounts, or lack thereof.
-        // "accounts" will always be an array, but it can be empty.
-      });
-    }
-  };
-
   const cancelButtonRef = useRef(null);
 
   async function loadData() {
-    await checkWallet();
     const nftRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/nft/${nftAddress}`
     );
@@ -77,7 +51,6 @@ function NFT() {
   }
 
   async function updateNFTPrice(inputPrice) {
-    console.log(NFT.address + ' ' + inputPrice);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/nft/patchNFTPrice`,
       {
@@ -93,7 +66,7 @@ function NFT() {
     )
       .then((response) => response.json())
       .then((json) => console.log(json));
-    console.log('compete');
+    console.log('complete');
   }
 
   if (loadingState === 'loaded' && Object.keys(NFT).length === 0)
@@ -364,7 +337,7 @@ function NFT() {
                       </p>
                     </div>
                   </div>
-                  {account && NFT.owner === account.toLowerCase() ? (
+                  {address && NFT.owner === address.toLowerCase() ? (
                     <div
                       name="pricing-offer-buttons"
                       className="flex row p-2 space-x-2"
@@ -476,4 +449,4 @@ function NFT() {
   );
 }
 
-export default withCookies(NFT);
+export default NFT;
