@@ -24,7 +24,7 @@ export default function Nav() {
   };
 
   const checkOwner = async () => {
-    if (owners.includes(address ? address.toLowerCase() : null)) {
+    if (owners.includes(address ? address : null)) {
       setProjectOwner(true);
     } else {
       setProjectOwner(false);

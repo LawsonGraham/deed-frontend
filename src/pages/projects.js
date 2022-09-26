@@ -114,21 +114,7 @@ function Projects() {
                   'ME - Maine',
                   'MI - Michigan',
                   'MT - Montana',
-                  'NJ - New Jersey',
-                  'NM - New Mexico',
-                  'NV - Nevada',
-                  'NY - New York',
-                  'OH - Ohio',
-                  'OK - Oklahoma',
-                  'OR - Oregon',
-                  'PA - Pennsylvania',
-                  'RI - Rhode Island',
-                  'SD - South Dakota',
-                  'UT - Utah',
-                  'VA - Virginia',
-                  'VT - Vermont',
-                  'WA - Washington',
-                  'WV - West Virginia',
+                  '...',
                 ]}
               />
             </div>
@@ -137,12 +123,7 @@ function Projects() {
                 keyy={1}
                 updateFilter={updateFilter}
                 listName="Fundraise Range"
-                listValues={[
-                  '0 - 10,000',
-                  '10,000 - 100,000',
-                  '100,000 - 1,000,000',
-                  '1,000,000+',
-                ]}
+                listValues={['0 - 150', '150 - 500', '500 - 1,000', '1,000+']}
               />
             </div>
             <div className="grid grid-cols-1 px-4">
@@ -199,8 +180,8 @@ function Projects() {
                     </p>
                     <p className="text-md font-bold text-black pt-2 basis-7/12">
                       {Math.round(
-                        (project.totalShares / project.raiseGoal) * 100
-                      ) / 100}{' '}
+                        (project.raiseGoal / project.totalShares) * 10000
+                      ) / 10000}{' '}
                       ETH / Share
                     </p>
                   </div>

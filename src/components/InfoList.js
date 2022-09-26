@@ -26,9 +26,8 @@ export default function InfoList(props) {
         </div>
         <div className="basis-7/12">
           <p className="text-center">
-            {(
-              Math.round((project.totalShares / project.raiseGoal) * 100) / 100
-            ).toLocaleString('en-US')}{' '}
+            {Math.round((project.raiseGoal / project.totalShares) * 10000) /
+              10000}{' '}
             ETH
           </p>
         </div>

@@ -175,13 +175,16 @@ function Project({ nftsData, projectData }) {
                 </div>
                 <div className="flex flex-row">
                   <div className="basis-4/12 font-bold text-center">
-                    {project.nftsNum}
+                    {nftsData.length}
                   </div>
                   <div className="basis-4/12 font-bold text-center">
                     {project.totalTransactions}
                   </div>
                   <div className="basis-4/12 font-bold text-center">
-                    {project.totalValue} ETH
+                    {project.raiseCurrent < 1000
+                      ? Math.round(project.raiseCurrent)
+                      : Math.round(project.raiseCurrent / 100) / 10 + 'K'}{' '}
+                    ETH
                   </div>
                 </div>
               </div>
@@ -210,20 +213,21 @@ function Project({ nftsData, projectData }) {
                       <Link href={{ pathname: `/nfts/${nft.address}` }} key={i}>
                         <div
                           key={i}
-                          className=" shadow rounded-xl overflow-hidden object-contain bg-bgSubsection"
+                          className="flex flex-col-reverse shadow rounded-xl overflow-hidden object-contain bg-bgSubsection"
                         >
-                          <img
-                            src={nft.imageLink}
-                            className="object-cover mx-auto hover:scale-110 rounded-xl cursor-pointer w-full"
-                          />
-                          <div className="p-4">
+                          <div className="p-4 basis-[1/6]">
                             <p
                               style={{ height: '32px' }}
-                              className="text-xl text-center font-semibold"
+                              className="text-xl text-center font-semibold line-clamp-1"
                             >
                               {nft.nftName}
                             </p>
                           </div>
+
+                          <img
+                            src={nft.imageLink}
+                            className="object-fill mx-auto hover:scale-110 rounded-xl cursor-pointer w-full h-[85%]"
+                          />
                         </div>
                       </Link>
                     ))}

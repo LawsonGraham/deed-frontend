@@ -21,7 +21,7 @@ function MyAssets() {
     const nftRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/nft/owner/?` +
         new URLSearchParams({
-          owner: address ? address.toLowerCase() : '',
+          owner: address ? address : '',
         }),
       {
         method: 'GET',
@@ -53,16 +53,19 @@ function MyAssets() {
   //   );
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mx-default">
       <div className="p-4">
-        <h1 className="text-3xl font-bold my-2 pl-4"> Your NFTs</h1>
+        <h1 className="text-3xl font-bold my-2 pl-4 text-center py-3">
+          {' '}
+          Your NFTs
+        </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {Object.keys(nfts).length === 0 ? (
             <h1 className="py-10 px-20 text-3xl"> No NFTs owned </h1>
           ) : (
             nfts.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <img src={nft.imageLink} className="w-full" />
+                <img src={nft.imageLink} className="w-full h-[71%]" />
                 <div className="p-4 bg-black">
                   <p className="text-2xl font-bold text-white">
                     Price - {nft.price} Eth

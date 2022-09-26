@@ -43,7 +43,7 @@ function NFT() {
     setProjectData(projectData);
     const projNFTsRes = await fetch(
       // add project/${nftData.projecturl} to have just the project's nft
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/nft/`
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/nft/project/${nftData.projecturl}`
     );
     const projectNFTs = await projNFTsRes.json();
     setProjectNFTs(projectNFTs.slice(0, 8));
@@ -265,7 +265,7 @@ function NFT() {
                   Project Description
                 </button>
                 {showDescription && (
-                  <p className="p-3 bg-bgSubsection">
+                  <p className="p-3 bg-bgSubsection line-clamp-5">
                     {projectData.projectInfo}
                   </p>
                 )}
@@ -337,7 +337,7 @@ function NFT() {
                       </p>
                     </div>
                   </div>
-                  {address && NFT.owner === address.toLowerCase() ? (
+                  {address && NFT.owner === address ? (
                     <div
                       name="pricing-offer-buttons"
                       className="flex row p-2 space-x-2"
@@ -428,12 +428,12 @@ function NFT() {
                   >
                     <img
                       src={nft.imageLink}
-                      className="object-cover mx-auto hover:scale-110 rounded-xl w-fill"
+                      className="object-cover mx-auto hover:scale-110 rounded-xl w-full h-[75%]"
                     />
                     <div className="p-4">
                       <p
                         style={{ height: '32px' }}
-                        className="text-2xl font-semibold"
+                        className="text-xl font-semibold text-center"
                       >
                         {nft.nftName}
                       </p>

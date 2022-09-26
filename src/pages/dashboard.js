@@ -23,7 +23,7 @@ export default function CreatorDashboard() {
     const projectsRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/project/?` +
         new URLSearchParams({
-          owner: address ? address.toLowerCase() : '',
+          owner: address ? address : '',
         }),
       {
         method: 'GET',
@@ -133,8 +133,8 @@ export default function CreatorDashboard() {
                         <p>
                           {(
                             Math.round(
-                              (project.totalShares / project.raiseGoal) * 100
-                            ) / 100
+                              (project.raiseGoal * 10000) / project.totalShares
+                            ) / 10000
                           ).toLocaleString('en-US')}{' '}
                           ETH
                         </p>
